@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-dark">
+        <div class="container-fluid">
+            <a  href="/" class="navbar-brand" style="color: white;">Home</a>
+            <a href="/course/course/create" class="navbar-brand" style="color: white;">Create</a>
+        <form class="d-flex" method="post" action="./course/search">
+            <input class="form-control me-2" placeholder="Search" aria-label="Search" name="coursename">
+            <button class="btn btn-outline-success" type="submit" value="Search">Search</button>
+        </form>
+        </div>
+    </nav>
+
+    <div class="mt-4">
+        <form method="post" action="/course/doupdate{{course._id}}">
+            <h2>Update course</h2>
+            <div class="form-group">
+                <label for="coursename" >Course Name</label>
+                <input type="text" name="coursename" class="form-control" value="{{course.coursename}}"  >
+            </div>
+            <div class="form-group">
+                <label for="topic" >Topic</label>
+                <input type="text" name="topic" class="form-control" value="{{course.topic}}">
+            </div>
+            {{!-- <div class="form-group">
+                <label for="exampleInputEmail1" ></label>
+                <input type="text" class="form-control"  >
+            </div> --}}
+            <button type="submit" class="btn btn-primary mt-4">Update</button>
+        </form>
+    </div>
+</body>
+</html>

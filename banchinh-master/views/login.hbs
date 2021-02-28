@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+</head>
+
+
+<body>  
+    <form method="POST" action="/account/dologin">
+        <p>Email</p>
+            <input type="text" id="email" name="email" >
+            <p>Password</p>
+            <input type="text" id="password" name="password">
+            <button id="btn" >Login</button>
+        </form>
+
+</body>
+    <script>
+        $("#btn").click(function(){
+            $.ajax({
+                url: '/account/dologin',
+                type : "post",
+                data:{
+                    username : $("#email").val(),
+                    password : $("#password").val(),
+                }
+            })
+            .then(data=>{
+                console.log(data);
+                if(!data.error){
+                window.location.href ='/home'
+                }
+            }) 
+        });
+    </script>
+
+</html>

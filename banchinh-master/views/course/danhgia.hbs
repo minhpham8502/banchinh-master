@@ -1,0 +1,27 @@
+
+{{#each data}}
+    <form action="/course/dodanhgiabaibao{{_id}}" method="POST">
+    <tbody>
+        <tr>
+        <th>
+            <p>bạn có thể dowload file tại đây<a href="/download/{{_id}}"> {{nameFile}}</a></p>
+            {{!-- <iframe src="/{{filePath}}" height="100%" width ="100%"></iframe> --}}
+            <iframe src="/{{filePath}}" height="100%" width ="100%"></iframe>
+        </th>
+        </tr>
+
+        <tr>
+        <th>
+            <a>Status: </a><input type = "text" name = "status"  value="{{status}}">
+        </th>
+        </tr>
+
+        <tr>
+        <th>
+            <a>Comment: </a><input type = "text" name = "comment" placeholder="viết comment tại đây">
+        </th>
+        </tr>
+            <button type="submit" class="btn btn-primary mt-4">cập nhật đnash giá</button>
+    </tbody>
+    </form>
+{{/each}}
