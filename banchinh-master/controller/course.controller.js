@@ -9,7 +9,7 @@ var fileModel = require('../models/file')
 class CourseController {
     
     create(req,res){
-        res.render('/course/create')
+        res.render('./course/create')
     }
 
     detail(req,res){
@@ -45,7 +45,7 @@ class CourseController {
             coursename : coursename,   
         })
         .then(data=>{
-            res.render('.course/course',{course:data})
+            res.render('./course/course',{course:data})
         })
     }
 
@@ -172,32 +172,28 @@ allstudent(req,res){
 
   })
 }
-        
-
            
                 //sơn test|
                 viewmanagine(req,res){
-                    let email = req.params.email
-                    console.log(email)
-                    fileModel.find({studentemail:email},(err,data)=>{
+                     let slug = req.params.slug
+                    AccountModel.find({slug:slug},(err,data)=>{
                 if(err){
                     console.log(err)
                 }
                 else if(data.length>0){
-                    res.render('course/baocuahocsinh',{data:data})
-                    console.log(data)
+                    res.render('./course/baocuahocsinh',{account:data})
+ 
 
                 }
                 else{
-                    res.render('course/baocuahocsinh',{data:data})
+                    res.render('./course/baocuahocsinh',{account:data})
                 }
             })
                 }
         
                 danhgiabaibao(req,res){
-                    let id = req.params.id
-                    console.log(id)
-                    fileModel.find({_id:id},(err,data)=>{
+                    let email = req.params.email
+                    fileModel.find({studentemail:email},(err,data)=>{
                 if(err){
                     console.log(err)
                 }
@@ -214,11 +210,8 @@ allstudent(req,res){
 
                 dodanhgiabaibao(req,res){
                     let id = req.params.id
-                    console.log("abc là :",id)
                     let status = req.body.status
-                    console.log("status là :",status)
                     let comment = req.body.comment
-                    console.log("comment là :",comment)
 
                     fileModel.updateOne(
                     { _id: id },   // Query parameter

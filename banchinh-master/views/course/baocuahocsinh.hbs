@@ -15,20 +15,21 @@
     <th>Name</th>
     <th>Status</th>
     <th>đánh giá bài đăng</th>
-    {{#each data}}
+    {{#each account}}
     
     <tbody>
         <tr>
-        <th>
-            <a href="/download/{{_id}}">{{nameFile}}</a>
-            
-        </th>
-        <th>
-            <p>{{status}}</p>
-        </th>
-        <th>
-            <a href="/course/course/danhgiabaibao{{_id}}">đánh giá</a>
-        </th>
+            <td>
+                <a href="/download/{{_id}}">{{nameFile}}</a>
+                <p>{{email}}</p>
+                
+            </td>
+            <td>
+                <p>{{status}}</p>
+            </td>
+            <td>
+                <a href="/course/danhgiabaibao{{email}}">đánh giá</a>
+            </td>
         </tr>
     </tbody>
       {{/each}}

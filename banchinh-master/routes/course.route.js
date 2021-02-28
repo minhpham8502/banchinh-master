@@ -16,8 +16,8 @@ courseRoute.use(checkAuth);
 courseRoute.use(checkAdmin);
 
 //sơn test|
-courseRoute.get('/course/viewmanagine:email', courseController.viewmanagine)
-courseRoute.get('/course/danhgiabaibao:id', courseController.danhgiabaibao)
+courseRoute.get('/view:slug', courseController.viewmanagine)
+courseRoute.get('/danhgiabaibao:email', courseController.danhgiabaibao)
 courseRoute.post('/dodanhgiabaibao:id', courseController.dodanhgiabaibao)
 courseRoute.use('/uploads', express.static('uploads'));
 courseRoute.use('/public', express.static('public'));
@@ -25,7 +25,7 @@ courseRoute.use('/public', express.static('public'));
 
 
 courseRoute.get('/course/update/:id',courseController.update)
-courseRoute.get('/course/create',courseController.create)
+courseRoute.get('/create',courseController.create)
 courseRoute.get('/course/delete/:id',courseController.delete)
 
 
