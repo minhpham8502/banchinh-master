@@ -10,17 +10,19 @@ courseRoute.get('/allcourse', courseController.allcourse)
 courseRoute.get('/course/:slug', courseController.detail)
 
 courseRoute.post('/course/search', courseController.search)
-courseRoute.get('/allStudent/:slug',courseController.allstudent)
+courseRoute.get('/allStudent/:slug',courseController.allstudent,)
+courseRoute.get('/Teacher/:slug',courseController.teacher)
 
 courseRoute.use(checkAuth);
 courseRoute.use(checkAdmin);
 
 //sơn test|
 courseRoute.get('/view:slug', courseController.viewmanagine)
-courseRoute.get('/danhgiabaibao:email', courseController.danhgiabaibao)
+courseRoute.get('/evaluate/:id', courseController.danhgiabaibao)
 courseRoute.post('/dodanhgiabaibao:id', courseController.dodanhgiabaibao)
 courseRoute.use('/uploads', express.static('uploads'));
 courseRoute.use('/public', express.static('public'));
+courseRoute.get('/allDocument/:email', courseController.allDocument)
 
 
 

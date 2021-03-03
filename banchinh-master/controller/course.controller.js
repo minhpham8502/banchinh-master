@@ -4,7 +4,8 @@ const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
 var bcrypt = require('bcrypt');
 
-var fileModel = require('../models/file')
+var fileModel = require('../models/file');
+const { findById } = require('../models/course');
 
 class CourseController {
     
@@ -61,29 +62,6 @@ class CourseController {
     }
 
     docreate(req,res){
-        // var coursename = req.body.coursename;
-        // var topic = req.body.topic;
-        // var slug = req.body.slug
-        // CourseModel.findOne({
-        //     coursename : coursename,
-        //     topic : topic
-        // })
-        // .then(data=>{
-        //     if(data){
-        //         res.json("da ton tai")
-        //     }
-        //     else{
-        //         return CourseModel.create({
-        //             coursename : coursename,
-        //             topic : topic,
-        //             slug : coursename
-        //         })
-        //     }
-        // })
-        // .then(data=>{
-        //     res.redirect('/course/allcourse')
-        // })
-        // .catch(err=>{})
         var coursenme = req.body.coursename
 
         var newCourse = CourseModel({
@@ -127,18 +105,7 @@ addStudent(req,res){
 //         res.render('./student/course_student',{course:data})    
 // })
 res.render('./student/course_student',{course:data})    
-
 }
-// dotimhocsinh(req,res){
-//     AccountModel.find({
-//         email : req.body.email,   
-//     })
-//     .then(data=>{
-//         res.render('timhocsinh',{account:data})
-        
-//     })
-// }
-
 doAddStudent(req,res){
         let username = req.body.username;
         let password = req.body.password;
@@ -164,19 +131,33 @@ doAddStudent(req,res){
 }
 
 allstudent(req,res){
-    let slug = req.params.slug
-  AccountModel.find({
-      slug: slug
-  }).then(data=>{
-  res.render('./student/allstudent',{account: data})
-
-  })
+        CourseModel.find({slug:req.params.slug})
+        AccountModel.find({
+            slug: req.params.slug,
+            'role' :'student'
+        })
+        .then(data=>{
+        res.render('./student/allstudent', {account:data})
+        })  
+    
 }
+teacher(req,res){
+    
+    AccountModel.find({
+        slug: req.params.slug,
+        role :'teacher'
+    })
+    .then(data=>{
+    res.render('./teacher/teacher_profile', {teacher:data})
+    })  
+
+}
+
            
                 //sơn test|
                 viewmanagine(req,res){
                      let slug = req.params.slug
-                    AccountModel.find({slug:slug},(err,data)=>{
+                    AccountModel.find({slug:slug,role:"student"},(err,data)=>{
                 if(err){
                     console.log(err)
                 }
@@ -190,16 +171,22 @@ allstudent(req,res){
                 }
             })
                 }
+                allDocument(req,res){
+                    fileModel.find({
+                        studentemail : req.params.email
+                    }).then(data=>{
+                        res.render('./file/allDocument',{file : data})
+                    })
+                }
         
                 danhgiabaibao(req,res){
-                    let email = req.params.email
-                    fileModel.find({studentemail:email},(err,data)=>{
+                    let id = req.params.id
+                    fileModel.find({_id:id},(err,data)=>{
                 if(err){
                     console.log(err)
                 }
                 else if(data.length>0){
                     res.render('course/danhgia',{data:data})
-                    console.log(data)
 
                 }
                 else{

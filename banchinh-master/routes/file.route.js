@@ -128,7 +128,31 @@ fileRouter.post('/upload',upload.single('filePath'),(req,res)=>{
             } else {
                 console.log('Message sent: ' +  info.response);
             }
-        });    
+        });
+        let slug = req.cookies.slug
+        console.log("slug là : ",slug)
+        AccountModel.findOne({
+            role: "MarketingCoordinator",
+            slug: slug
+        },function(err, result){
+            console.log("DUPLICATE STATUS: ", result.email);
+            //tiến hành gửi mail cho MarketingCoordinator 
+            var content = email + 'vừa upload 1 bài báo lên hệ thống. Name: ' + x;
+            var mainOptions2 = { // thiết lập đối tượng, nội dung gửi mail
+            from: 'NQH-Test nodemailer',
+            to: result.email,  // địa chỉ gửi mail
+            subject: 'bài đăng mới',
+            text: content //nội dungdung
+        }
+            // gửi mail cho MarketingCoordinator 
+            transporter.sendMail(mainOptions2, function(err, info){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Message sent: ' +  info.response);
+                }
+        });
+        })
         res.redirect('/file')
     })
 })

@@ -6,68 +6,72 @@ var bcrypt = require('bcrypt');
 var saltRounds = 10;
 
 
-let addStudent = (req,res)=>{
+let addTeacher = (req,res)=>{
     CourseModel.find(function(err,data){
-        res.render('./student/course_student',{course:data})    
+        res.render('./teacher/course_teacher',{course:data})    
 })
 }
 
-let doAddStudent=(req,res)=>{
+let doAddTeacher=(req,res)=>{
         let username = req.body.username;
         let password = req.body.password;
         let email = req.body.email;
         let slug = req.body.slug;
-        
+        let role = req.body.role
                 const salt = bcrypt.genSaltSync(saltRounds);
                 const hash = bcrypt.hashSync(password, salt);
                 let newStudent = AccountModel({
                     username,
                     password :hash,
                     email,
-                    slug  
+                    slug,
+                    role : "teacher"
                 })
                 newStudent.save(function(err,data){
                     if(err){
                         console.log(err)
                     }else{
-                        res.redirect('/course/allstudent/'+req.body.slug)
+                        res.redirect('/course/Teacher/'+req.body.slug)
+
+                        
                     }
-                })
+    })
 }
 
 let update =(req,res)=>{
     AccountModel.findById(req.params.id)
         .then(data=>
-            res.render('student/updatestudent',{account:data})
+            res.render('teacher/updateTeacher',{account:data})
         )
 }
-let deleteStudent = (req,res)=>{
+let deleteTeacher = (req,res)=>{
     AccountModel.findById({_id:req.params.id},function(err,data){
         let slug = data.slug
         AccountModel.deleteOne({
             _id :  req.params.id
         })
         .then(()=>{
-            res.redirect('/course/allStudent/'+ slug)
+            res.redirect('/course/Teacher/'+ slug)
         })
     })
     
     
 }
 let doupdate =(req,res)=>{
+    
     AccountModel.updateOne({
         _id : req.params.id
     }, req.body)
     .then(()=>{
-        res.redirect('/course/allStudent/'+ req.body.slug)
+        res.redirect('/course/Teacher/'+ req.body.slug)
     })
 }
 
 module.exports ={
-    addStudent,
-    doAddStudent,
+    addTeacher,
+    doAddTeacher,
     doupdate,
-    deleteStudent,
+    deleteTeacher,
     update
 
 }

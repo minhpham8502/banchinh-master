@@ -12,6 +12,8 @@ var AccountRoutes = require('./routes/account.route')
 var courseRoute = require('./routes/course.route')
 var indexrouter = require('./routes/index.route')
 var studentRoute = require('./routes/student.route')
+var teacherRoute = require('./routes/teacher.route')
+
 
 var fileModel =require('./models/file')
 var fileRouter = require('./routes/file.route')
@@ -30,6 +32,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 // app.use('/views', express.static(path.join(__dirname,'views')))
 app.use('/student', studentRoute);
+app.use('/teacher', teacherRoute);
 app.use('/account', AccountRoutes);
 app.use('/course',courseRoute);
 app.use('/',indexrouter);

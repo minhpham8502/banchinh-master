@@ -9,26 +9,28 @@
     <title>Document</title>
 </head>
 <body>
-   <table class="table table-striped">
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>username</th>
-        <th>password</th>
+        <th>Username</th>
+        <th>Email</th>
         <th>Action</th>
         <th></th>
       </tr>
     </thead>
 
       <tbody>
-        {{#each account}}  
+        {{#each teacher}}  
           <tr>
             <td>{{username}}</td>
             <td>{{email}}</td>
-            <td><a href="/student/delete{{_id}}">Delete</a></td>
-            <td><a href="/student/update{{_id}}">Update</a></td>
+            <td><a href="/teacher/delete{{_id}}">Delete</a></td>
+            <td><a href="/teacher/update{{_id}}">Update</a></td>
           </tr>
         {{/each}}
       </tbody>
   </table>
+
+
 </body>
 </html>
