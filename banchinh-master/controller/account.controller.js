@@ -1,6 +1,7 @@
 // let {signUp} = require('../service/auth')
 const { JsonWebTokenError } = require('jsonwebtoken');
 const AccountModel = require('../models/account');
+const CourseModel = require('../models/course')
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 const { data } = require('jquery');
@@ -62,12 +63,27 @@ let loginController = function(req,res){
             // })
 
             res.cookie('email',user.email, { maxAge: 900000, httpOnly: true });
+            res.cookie('slug',user.slug, { maxAge: 900000, httpOnly: true });
+            
             if(user.role === "admin"){
                 res.render("home/homeAdmin",{account:user})
             }
             if(user.role === "student"){
                 res.render('./home/homeStudent',{account:user})
-            }            
+            }
+            if(user.role === "teacher"){
+                res.render('./home/homeTeacher',{account:user})
+            }
+            if(user.role === "guest"){
+                CourseModel.find({
+                })
+                .then(data=>{
+                    res.render('./home/homeGuest',{account:user,course:data})
+                })
+                .catch(err=>{
+                    res.json("loi sever")
+                })
+            }                        
         }else{
             return res.status(400).json({   
                 message : "Sai tk,mk",

@@ -22,6 +22,7 @@ var picSchema= new mongoose.Schema({
         type : String,
         default : ""
     },
+    slug :String
 })
 
 var picModel = mongoose.model('file',picSchema);

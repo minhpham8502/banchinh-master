@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+    {{!-- <form action="/file/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="filePath" id="filePath" required><br>
+      <input type="submit" value="upload file">
+    </form> --}}
+    
+        <table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th scope="col" style="font-size:20px;">Những đóng góp của sinh viên</th>
+        </tr>
+    </thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>đánh giá bài đăng</th>
+    {{#each data}}
+    
+    <tbody>
+        <tr>
+            <td>
+                <a href="/download/{{_id}}">{{nameFile}}</a>                
+            </td>
+            <td>                <p>{{studentemail}}</p>
+</td>
+
+            <td>
+                <a href="/guest/danhgiabaibao{{_id}}">xem bài báo</a>
+            </td>
+        </tr>
+    </tbody>
+      {{/each}}
+
+    </table>
+
+</body>
+</html>

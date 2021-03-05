@@ -4,6 +4,21 @@ let {getUserById} = require('../middleware/index')
 var jwt = require("jsonwebtoken")
 
 indexrouter.get('/login' ,(req,res,next)=>{
+//         let dealine = '2021-3-1';
+// let ts = Date.now();
+// let date_ob = new Date(ts);
+// let date = date_ob.getDate();
+// let month = date_ob.getMonth() + 1;
+// let year = date_ob.getFullYear();
+// dl = year + "-" + month + "-" + date;
+// console.log("abc:",dl)
+// // prints date & time in YYYY-MM-DD format
+// console.log(year + "-" + month + "-" + date);
+// if(dl < dealine  ){
+//     res.render('login.hbs')
+// }else{
+//     console.log("dahethannopbai")
+// }
     res.render('login.hbs')
 })
 
@@ -19,6 +34,10 @@ indexrouter.get('/home',async function (req,res){
         if(user.role === "student"){
             return res.render("home/homeStudent")
         }
+        if(user.role === "teacher"){
+            return res.render("home/homeTeacher")
+        }
+        
     } catch (error) {
         res.status(500).json({
             message : "hay dang nhap",

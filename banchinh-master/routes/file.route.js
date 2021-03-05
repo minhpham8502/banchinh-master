@@ -4,7 +4,7 @@ var fileModel = require('../models/file')
 var multer =  require('multer');
 var bodyParser = require('body-parser');
 let {checkAuth } = require('../middleware/index')
-
+var AccountModel = require('../models/account')
 const nodemailer =  require('nodemailer');
 
 // sơn test chuyển word sang pdf npm i docx-pdf
@@ -90,7 +90,8 @@ fileRouter.post('/upload',upload.single('filePath'),(req,res)=>{
     var temp = new fileModel({
         filePath:filePath,
         nameFile : nameFile,
-        studentemail: email
+        studentemail: email,
+        slug: req.cookies.slug
     })
   
     temp.save((err,data)=>{
@@ -125,17 +126,15 @@ fileRouter.post('/upload',upload.single('filePath'),(req,res)=>{
         transporter.sendMail(mainOptions, function(err, info){
             if (err) {
                 console.log(err);
-            } else {
-                console.log('Message sent: ' +  info.response);
-            }
+            } 
         });
         let slug = req.cookies.slug
-        console.log("slug là : ",slug)
+
         AccountModel.findOne({
-            role: "MarketingCoordinator",
+            role: "teacher",
             slug: slug
         },function(err, result){
-            console.log("DUPLICATE STATUS: ", result.email);
+
             //tiến hành gửi mail cho MarketingCoordinator 
             var content = email + 'vừa upload 1 bài báo lên hệ thống. Name: ' + x;
             var mainOptions2 = { // thiết lập đối tượng, nội dung gửi mail
@@ -148,9 +147,7 @@ fileRouter.post('/upload',upload.single('filePath'),(req,res)=>{
             transporter.sendMail(mainOptions2, function(err, info){
                 if (err) {
                     console.log(err);
-                } else {
-                    console.log('Message sent: ' +  info.response);
-                }
+                } 
         });
         })
         res.redirect('/file')
