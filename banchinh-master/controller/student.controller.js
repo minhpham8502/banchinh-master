@@ -4,7 +4,7 @@ const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
-
+var cookie = require('cookie');
 
 let addStudent = (req,res)=>{
     CourseModel.find(function(err,data){
@@ -63,11 +63,20 @@ let doupdate =(req,res)=>{
     })
 }
 
+let chat = (req,res)=>{
+    AccountModel.findOne({
+        _id : req.params.id,
+    }).then(data=>{
+    // res.render('./student/chat',{account:data})
+        // res.render('index',{account:data})
+    })
+}
+
 module.exports ={
     addStudent,
     doAddStudent,
     doupdate,
     deleteStudent,
-    update
-
+    update,
+    chat
 }

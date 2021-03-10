@@ -1,8 +1,12 @@
 const express = require("express");
+// const app = express();
 const app = express();
+
 var bodyParser = require('body-parser')
 var jwt = require('jsonwebtoken');
 var cookieParser = require('cookie-parser')
+var path = require('path');
+
 app.set('views','./views');
 
 app.set('view engine','hbs');
@@ -18,7 +22,6 @@ var guestRoutes = require('./routes/guest.route')
 var fileModel =require('./models/file')
 var fileRouter = require('./routes/file.route')
 
-var path = require('path');
 var pathh = path.resolve(__dirname,'public');
 app.use(express.static(pathh));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -66,6 +69,69 @@ app.get('/hienthi',(req,res)=>{
        }
   })
 })
+// //////////////////////////////////////////////////////////////////////////////////
+
+
+const http = require('http');
+
+const socketio = require('socket.io');
+const formatMessage = require('./utils/messages');
+const {
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers
+} = require('./utils/users');
+// var AccountRoute = require('./routers/account.route')
+
+
+const server = http.createServer(app);
+const io = socketio(server);
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use('chat', AccountRoute);
+// const botName = 'ChatCord Bot';
+
+// Run when client connects
+io.on('connection', socket => {
+  socket.on('joinRoom', ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
+
+    socket.join(user.room);
+
+    // Send users and room info
+    io.to(user.room).emit('roomUsers', {
+      room: user.room,
+      users: getRoomUsers(user.room)
+    });
+  });
+
+  // Listen for chatMessage
+  socket.on('chatMessage', msg => {
+    const user = getCurrentUser(socket.id);
+
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
+  });
+
+  // Runs when client disconnects
+  socket.on('disconnect', () => {
+    const user = userLeave(socket.id);
+
+    if (user) {
+      io.to(user.room).emit(
+        'message',
+        formatMessage(botName, `${user.username} has left the chat`)
+      );
+
+      // Send users and room info
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    }
+  });
+});
 
 
 const PORT = process.env.PORT || 3000;
@@ -73,45 +139,3 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-// app.get('/', function(req,res){
-//   res.render('login')
-// })
-
-// app.post('/dologin', function(req,res,next){
-//   var username = req.body.username;
-//         var password = req.body.password;
-    
-//         AccountModel.findOne({
-//             username : username,
-//             password : password
-//         })
-//         .then(data=>{   
-//             var token = jwt.sign({_id : data._id},'minh')
-//             if(data){
-//                 res.json({
-//                     message: 'thanh cong',
-//                     token : token
-//                 })
-
-//             }else{
-//                 return  res.json('that bai')
-//             }
-//         })
-//         .catch(err=>{
-//             res.json('loi sever')
-//         })
-// })
-  
-// app.get('/private', function(req,res,next){
-//   try {
-//     var token = req.cookies.token
-//     var result = jwt.verify(token,'minh')
-//     if(result){
-//       next()
-//     }
-//   } catch (err) {
-//     return res.json('hay login')
-//   }
-// },(req,res,next)=>{
-//   res.json('hello')
-// })

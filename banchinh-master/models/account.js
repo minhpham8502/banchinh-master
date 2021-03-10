@@ -18,6 +18,10 @@ const AccountSchema = new Schema({
         type : String,
         default : "student"
     },
+    deadline: {
+        type : String,
+        default : ""
+    },
     // fileSummit:[{
     //     type : mongoose.Schema.Types.ObjectId
     // }]   

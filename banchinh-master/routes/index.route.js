@@ -2,6 +2,7 @@ var express = require('express');
 var indexrouter = express.Router();
 let {getUserById} = require('../middleware/index')
 var jwt = require("jsonwebtoken")
+var AccountModel = require('../models/account')
 
 indexrouter.get('/login' ,(req,res,next)=>{
 //         let dealine = '2021-3-1';
@@ -47,4 +48,19 @@ indexrouter.get('/home',async function (req,res){
         )
     }
 })
+
+
+
+
+indexrouter.post('/set' ,(req,res,next)=>{
+    let date = req.body.date;
+    let time = req.body.time;
+    let deadline = date + " " + time;
+    AccountModel.findOneAndUpdate({role: "admin"},{deadline:deadline})
+    .then(data=>{
+        res.json(data)
+    })
+    
+})
+
 module.exports = indexrouter

@@ -50,8 +50,42 @@ fileRouter.get('/',(req,res)=>{
 })
 
 fileRouter.get('/dieukhoan',(req,res)=>{
-    res.render('file/dieukhoan')
+    AccountModel.findOne({
+        role: "admin"
+    },function(err, result){
+        console.log("dealine lấy từ db: ",result.deadline)
+        let ts = Date.now();
+        let date_ob = new Date(ts);
+        let date = date_ob.getDate();
+        let month = date_ob.getMonth() + 1;
+        let hour = date_ob.getHours();
+        let minutes = date_ob.getMinutes();
+        let year = date_ob.getFullYear();
+        if(minutes.length < 2){
+            dl = year + "-" + month + "-" + date + " " + hour + ":0" + minutes ;
+            if(month.length < 2){
+                dl = year + "-0" + month + "-" + date + " " + hour + ":" + minutes ;
+            }else{
+                dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes ;
+            }
+        }else{
+            dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes ;
+            if(month.length < 2){
+                dl = year + "-0" + month + "-" + date + " " + hour + ":" + minutes ;
+            }else{
+                dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes ;
+            }
+        }
+        
+        console.log("abc:",dl)
+        if(dl < result.deadline  ){
+            res.render('file/dieukhoan')
+        } else{
+            res.json("da het han nop bai")
+        }
+    })    
 })
+
 
 fileRouter.post('/upload',upload.single('filePath'),(req,res)=>{
     var x = 'uploads/'+req.file.originalname;
