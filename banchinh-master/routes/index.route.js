@@ -49,9 +49,6 @@ indexrouter.get('/home',async function (req,res){
     }
 })
 
-
-
-
 indexrouter.post('/set' ,(req,res,next)=>{
     let date = req.body.date;
     let time = req.body.time;
