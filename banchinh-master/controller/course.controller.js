@@ -199,19 +199,19 @@ teacher(req,res){
                     let id = req.params.id
                     let status = req.body.status
                     let comment = req.body.comment
-
+                    fileModel.findById({_id :id},function(err,data){
+                        let studentemail = data.studentemail
                     fileModel.updateOne(
                     { _id: id },   // Query parameter
                     {                     // Replacement document
                         status: status,
                         comment: comment
                     })
-                    .then(data=>{
-                        res.redirect('/course/allcourse')
+                    .then(()=>{
+                            res.redirect('/course/allDocument/' + studentemail)
+                        })
                     })
-                    .catch(err=>{
-                        res.json("loi sever")
-                    })
+         
                 }
 }
 module.exports = new CourseController;

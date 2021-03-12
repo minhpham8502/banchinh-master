@@ -68,7 +68,7 @@ let chat = (req,res)=>{
         _id : req.params.id,
     }).then(data=>{
     // res.render('./student/chat',{account:data})
-        // res.render('index',{account:data})
+         res.render('index',{account:data})
     })
 }
 

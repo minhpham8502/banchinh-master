@@ -1,7 +1,7 @@
 var express = require('express');
 var CourseModel = require('../models/course'); 
 var courseRoute = express.Router();
-let {checkAuth,checkAdmin } = require('../middleware/index')
+let {checkAuth,checkAdmin,checkTeacher } = require('../middleware/index')
 const { isEmail } = require('../middleware/index');
 
 const courseController = require('../controller/course.controller');
@@ -14,15 +14,21 @@ courseRoute.get('/allStudent/:slug',courseController.allstudent,)
 courseRoute.get('/Teacher/:slug',courseController.teacher)
 
 courseRoute.use(checkAuth);
+courseRoute.get('/view:slug', checkTeacher,courseController.viewmanagine)
+courseRoute.get('/evaluate/:id', checkTeacher,courseController.danhgiabaibao)
+courseRoute.get('/allDocument/:email',checkTeacher ,courseController.allDocument)
+
+courseRoute.post('/dodanhgiabaibao:id', checkTeacher,courseController.dodanhgiabaibao)
+
+
+
 courseRoute.use(checkAdmin);
 
 //sơn test|
-courseRoute.get('/view:slug', courseController.viewmanagine)
-courseRoute.get('/evaluate/:id', courseController.danhgiabaibao)
-courseRoute.post('/dodanhgiabaibao:id', courseController.dodanhgiabaibao)
+
+
 courseRoute.use('/uploads', express.static('uploads'));
 courseRoute.use('/public', express.static('public'));
-courseRoute.get('/allDocument/:email', courseController.allDocument)
 
 
 

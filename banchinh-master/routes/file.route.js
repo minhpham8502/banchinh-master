@@ -33,7 +33,7 @@ var upload = multer({storage:storage})
 
 
 
-
+// sửa upload file
 fileRouter.get('/',(req,res)=>{
     let email = req.cookies.email
     fileModel.find({studentemail:email},(err,data)=>{
@@ -48,30 +48,35 @@ fileRouter.get('/',(req,res)=>{
         }
     })
 })
+fileRouter.get('/fileSubmited',(req,res)=>{
+    let email = req.cookies.email
+    fileModel.find({studentemail:email},(err,data)=>{
+        if(err){
+            console.log(err)
+        }
+        else if(data.length>0){
+            res.render('file/fileSubmited',{data:data})
+        }
+        else{
+            res.render('file/fileSubmited',{data:{data}})
+        }
+    })
+})
+
 
 fileRouter.get('/dieukhoan',(req,res)=>{
     AccountModel.findOne({
         role: "admin"
     },function(err, result){
+
         let ts = Date.now();
         let date_ob = new Date(ts);
-        let date = date_ob.getDate();
-        let month = date_ob.getMonth() + 1;
-        let hour = date_ob.getHours();
-        let minutes = date_ob.getMinutes();
+        let date = date_ob.getDate().toString().padStart(2, "0");;
+        let month = (date_ob.getMonth() + 1).toString().padStart(2, "0");
+        let hour = date_ob.getHours().toString().padStart(2, "0");;
+        let minutes = date_ob.getMinutes().toString().padStart(2, "0");;
         let year = date_ob.getFullYear();
-        if(minutes < 10){
-            dl = year + "-" + month + "-" + date + " " + hour + ":0" + minutes ;  
-        }else{
-                dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes ;
-        }
-        
-        if(month < 10){
-            dl = year + "-0" + month + "-" + date + " " + hour + ":" + minutes ;
-        }else{
-            dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes ;
-    }
-        
+        dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes;
         if(dl < result.deadline  ){
             res.render('file/dieukhoan')
         } else{
@@ -178,7 +183,7 @@ fileRouter.post('/upload',upload.single('filePath'),(req,res)=>{
                 } 
         });
         })
-        res.redirect('/file')
+        res.redirect('/file/fileSubmited')
     })
 })
 

@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+  <a href="/course/viewJava" class="w3-bar-item w3-button">View submissions</a>
+  <a href="" class="w3-bar-item w3-button">Logout</a>
+  <a href="/chat.html?username={{account.email}}&room={{account.slug}}" class="w3-bar-item w3-button">Chat room</a>
+
 <body>
     <table class="table table-striped">
     <thead>
       <tr>
         <th>Files :</th>
+        <th>Status :</th>
         <th>Action</th>
         <th></th>
       </tr>
@@ -20,8 +25,7 @@
         {{#each file}}  
           <tr>
             <td>{{nameFile}}</td>
-            <td><a href="/course/delete?id={{_id}}">Delete</a></td>
-            <td><a href="/update?id={{_id}}">Update</a></td>
+            <td>{{status}}</td>
             <td><a href="/course/evaluate/{{_id}}">đánh giá</a></td>
 
           </tr>

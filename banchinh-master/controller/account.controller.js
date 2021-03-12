@@ -62,8 +62,8 @@ let loginController = function(req,res){
             //     }
             // })
 
-            // res.cookie('email',user.email, { maxAge: 900000, httpOnly: true });
-            // res.cookie('slug',user.slug, { maxAge: 900000, httpOnly: true });
+            res.cookie('email',user.email, { maxAge: 900000, httpOnly: true });
+            res.cookie('slug',user.slug, { maxAge: 900000, httpOnly: true });
             
             if(user.role === "admin"){
                 res.render("home/homeAdmin",{account:user})

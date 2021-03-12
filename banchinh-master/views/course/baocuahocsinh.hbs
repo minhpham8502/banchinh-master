@@ -6,6 +6,11 @@
       <input type="submit" value="upload file">
     </form> --}}
     
+    <a href="/course/viewJava" class="w3-bar-item w3-button">View submissions</a>
+    <a href="" class="w3-bar-item w3-button">Logout</a>
+    <a href="/chat.html?username={{account.email}}&room={{account.slug}}" class="w3-bar-item w3-button">Chat room</a>
+    <a href="/chat.html?username={{account.email}}&room={{account.slug}}" class="w3-bar-item w3-button">Chat room</a>
+
         <table class="table table-striped mt-4">
     <thead>
         <tr>
@@ -13,8 +18,8 @@
         </tr>
     </thead>
     <th>Name</th>
-    <th>Status</th>
-    <th>đánh giá bài đăng</th>
+    <th>File submited</th>
+ 
     {{#each account}}
     
     <tbody>
@@ -25,11 +30,8 @@
                 
             </td>
             <td>
-                <p>{{status}}</p>
-            </td>
-            <td>
               
-                <a href="/course/allDocument/{{email}}"> Files submited</a>
+                <a href="/course/allDocument/{{email}}"> View</a>
 
             </td>
         </tr>

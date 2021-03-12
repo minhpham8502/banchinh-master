@@ -89,9 +89,9 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 // app.use('chat', AccountRoute);
-// const botName = 'ChatCord Bot';
+const botName = 'ChatCord Bot';
 
 // Run when client connects
 io.on('connection', socket => {
@@ -121,7 +121,7 @@ io.on('connection', socket => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} has left the chat`)
+        // formatMessage(botName, `${user.username} has left the chat`)
       );
 
       // Send users and room info
@@ -135,7 +135,8 @@ io.on('connection', socket => {
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
 
