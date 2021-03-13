@@ -117,12 +117,23 @@ let checkTeacher = (req,res,next)=>{
         })
     }
 }
+let checkStudent = (req,res,next)=>{
+    if (req.userLocal.role === "student"){
+        next()
+    }else{
+        return res.status(400).json({
+            message : "no permission",
+            status: 400,
+            error : true,
+        })
+    }
+}
 module.exports ={
     isEmail,
     checkLogin,
     checkAdmin,
     checkAuth,
     getUserById,
-    checkTeacher
-
+    checkTeacher,
+    checkStudent
 }

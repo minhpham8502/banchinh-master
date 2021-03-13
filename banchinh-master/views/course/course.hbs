@@ -9,7 +9,8 @@
 <body>
     <nav class="navbar navbar-light bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" style="color: white;">Navbar</a>
+            <a href="/account/indexAdmin" class="navbar-brand" >Home</a>
+            <a href="/course/allcourse" class="navbar-brand" >Khóa học</a>
             <a href="/course/create" class="navbar-brand" style="color: white;">Create</a>
             <a href="/student/addStudent" class="navbar-brand" style="color: white;">Create student</a>
             <a href="/teacher/addTeacher" class="navbar-brand" style="color: white;">Create Teacher</a>
@@ -18,7 +19,7 @@
             
         <form class="d-flex" method="post" action="./course/search">
             <input class="form-control me-2" placeholder="Search" aria-label="Search" name="coursename">
-            <button class="btn btn-outline-success" type="submit" value="Search">Search</button>
+            <button class="btn btn-outline-success" type="submit" value="Search Course">Search</button>
         </form>
         </div>
     </nav>
@@ -36,7 +37,6 @@
                         <p class="card-text">{{topic}}.</p>
                         <a href="/course/course/{{slug}}" class="btn btn-primary">Chi tiết</a>
                          <a href="/course/allStudent/{{slug}}" class="btn btn-primary">Edit Student</a>
-                         <a href="/course/view{{slug}}" class="btn btn-primary">xem bao cao</a>
                          <a href="/course/Teacher/{{slug}}" class="btn btn-primary">Teacher Profile</a>
                     </div>
                 </div>

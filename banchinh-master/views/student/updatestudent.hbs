@@ -7,16 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-dark">
-        <div class="container-fluid">
-            <a  href="/" class="navbar-brand" style="color: white;">Home</a>
-            <a href="/course/course/create" class="navbar-brand" style="color: white;">Create</a>
-        <form class="d-flex" method="post" action="./course/search">
-            <input class="form-control me-2" placeholder="Search" aria-label="Search" name="coursename">
-            <button class="btn btn-outline-success" type="submit" value="Search">Search</button>
-        </form>
-        </div>
-    </nav>
+    <a href="/account/indexAdmin" class="navbar-brand" >Home</a>
+    <a href="/course/allcourse" class="navbar-brand" >Khóa học</a>
+    <a href="/course/create" class="navbar-brand" > Create Faculity </a>
+    <a href="/student/addStudent" class="navbar-brand" >Create student</a>
+    <a href="/teacher/addTeacher" class="navbar-brand" >Create Teacher</a>
+    <a href="" class="navbar-brand" >Set time</a>
+    <a href="" class="w3-bar-item w3-button">Logout</a>
 
     <div class="mt-4">
         <form method="post" action="/student/doupdate{{account._id}}">

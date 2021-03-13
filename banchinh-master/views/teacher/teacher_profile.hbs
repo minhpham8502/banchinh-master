@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,8 +24,7 @@
           <tr>
             <td>{{username}}</td>
             <td>{{email}}</td>
-            <td><a href="/teacher/delete{{_id}}">Delete</a></td>
-            <td><a href="/teacher/update{{_id}}">Update</a></td>
+            
           </tr>
         {{/each}}
       </tbody>
@@ -33,4 +32,59 @@
 
 
 </body>
+</html> --}}
+
+<!DOCTYPE html>
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<body>
+  <a href="/account/indexAdmin" class="navbar-brand" >Home</a>
+  <a href="/course/allcourse" class="navbar-brand" >Khóa học</a>
+    <a href="/course/create" class="navbar-brand" > Create Faculity </a>
+    <a href="/student/addStudent" class="navbar-brand" >Create student</a>
+    <a href="/teacher/addTeacher" class="navbar-brand" >Create Teacher</a>
+    <a href="" class="navbar-brand" >Set time</a>
+    <a href="" class="w3-bar-item w3-button">Logout</a>
+  
+  <table class="table table-striped">
+    <thead>
+      {{#each teacher}}  
+      <tr>
+        <th>Username</th>
+        <td>{{username}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+         <td>{{email}}</td>
+      </tr>
+      <tr>
+        <th>Faculity</th>
+         <td>{{slug}}</td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+         <td>Phone</td>
+      </tr>
+      <tr>
+        <th>Birthday</th>
+         <td>Birthday</td>
+      </tr>
+      <tr>
+        <th>Address</th>
+         <td>Address</td>
+      </tr>
+      <tr>
+        <th>Acction</th>
+          <td><a href="/teacher/delete{{_id}}">Delete</a>
+            <a href="/teacher/update{{_id}}">Update</a></td>
+      </tr>
+      {{/each}}
+    </thead>
+  </table>
+
+</body>
 </html>
+

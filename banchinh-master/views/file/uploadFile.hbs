@@ -7,44 +7,10 @@
 
 <body>
 
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none ; background-color: gray" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-large"
-  onclick="w3_close()">Close &times;</button>
-  
-  <div class="w3-bar w3-gray">
-  <a href="#" class="w3-bar-item w3-button">Detail</a>
-  <a href="/file" class="w3-bar-item w3-button">Summit</a>
-  <a href="#" class="w3-bar-item w3-button">Link 3</a>
-</div>
-</div>
-
-<div id="main">
-
-<div class="" style="background-color: #4B4644; color : white" >
-  <button id="openNav" class="w3-button  w3-xlarge" style="background-color: #4B4644;"  onclick="w3_open()">&#9776;</button>
-  <div class="w3-container"style="background-color: #4B4644;">
-    <h1>Summit files:</h1>
-  </div>
-</div>
-
-<div class="w3-container">
-
-</div>
-
-<script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
-</script>
-
+  <a href="/account/indexStudent" class="w3-bar-item w3-button">Home</a>
+  <a href="/file/dieukhoan" class="w3-bar-item w3-button">uploadfile</a>
+  <a href="/file/fileSubmited" class="w3-bar-item w3-button">File Submited</a>
+  <a href="" class="w3-bar-item w3-button">Logout</a>
     {{!-- <form action="/file/upload" method="POST" enctype="multipart/form-data">
       <input type="file" name="filePath" id="filePath" required><br>
       <input type="submit" value="upload file">

@@ -7,7 +7,51 @@ var bcrypt = require('bcrypt');
 const { data } = require('jquery');
 const saltRounds = 10;
 // const { model } = require('../models/account');
+let indexAdmin = (req,res)=>{
+    let email = req.cookies.email
+    AccountModel.findOne({email : email})
+    .then(data=>{
+        console.log(data)
+        res.render('./home/homeAdmin',{account:data})
 
+    })
+}
+let indexTeacher = (req,res)=>{
+    let email = req.cookies.email
+    AccountModel.findOne({email : email})
+    .then(data=>{
+        console.log(data)
+        res.render('./home/homeTeacher',{account:data})
+
+    })
+}
+let indexStudent = (req,res)=>{
+    let email = req.cookies.email
+    AccountModel.findOne({email : email})
+    .then(data=>{
+        console.log(data)
+        res.render('./home/homeStudent',{account:data})
+
+    })
+}
+// let indexGuest = (req,res)=>{
+//     let email = req.cookies.email
+//     AccountModel.findOne({email : email})
+//     .then(data=>{
+//         console.log(data)
+//         res.render('./home/homeGuest',{account:data})
+
+//     })
+// }
+// let indexManager = (req,res)=>{
+//     let email = req.cookies.email
+//     AccountModel.findOne({email : email})
+//     .then(data=>{
+//         console.log(data)
+//         res.render('./home/homeManager',{account:data})
+
+//     })
+// }
 
 let signUpController = async(req,res)=>{
     try {
@@ -112,6 +156,8 @@ let loginController = function(req,res){
 module.exports ={
     signUpController,
     loginController,
-     
+    indexAdmin,
+    indexTeacher,
+    indexStudent
 }
 

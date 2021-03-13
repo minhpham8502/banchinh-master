@@ -10,6 +10,11 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
+    <a href="/account/indexTeacher" class="w3-bar-item w3-button">Home</a>
+  <a href="/course/viewJava" class="w3-bar-item w3-button">View submissions</a>
+  
+  <a href="" class="w3-bar-item w3-button">Logout</a>
+
     {{#each data}}
     <form action="/course/dodanhgiabaibao{{_id}}" method="POST">
     <tbody>

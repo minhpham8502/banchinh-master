@@ -1,4 +1,4 @@
-
+{{!-- 
 <!DOCTYPE html>
 <html>
 <body>
@@ -9,6 +9,58 @@
 <input type="submit">
 </form>
 
+
+</body>
+</html> --}}
+
+<!DOCTYPE html>
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+<body>
+    <a href="/course/allcourse" class="navbar-brand" >Khóa học</a>
+    <a href="/course/create" class="navbar-brand" > Create Faculity </a>
+    <a href="/student/addStudent" class="navbar-brand" >Create student</a>
+    <a href="/teacher/addTeacher" class="navbar-brand" >Create Teacher</a>
+
+    <a href="" class="navbar-brand" >Set time</a>
+
+  <a href="" class="w3-bar-item w3-button">Logout</a>
+
+    <p> cài đặt hạn nộp bài cho toàn bộ học sinh( Làm popup trong set time)</p>
+<form action="/set" method="POST">
+<input type="date" name="date">
+<input type="time" name="time">
+<input type="submit">
+
+  <h1>thông tin cá nhân</h1>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <td>{{account.username}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+         <td>{{account.email}}</td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+         <td>Phone</td>
+      </tr>
+      <tr>
+        <th>Birthday</th>
+         <td>Birthday</td>
+      </tr>
+      <tr>
+        <th>Address</th>
+         <td>Address</td>
+      </tr>
+    </thead>
+  </table>
 
 </body>
 </html>
